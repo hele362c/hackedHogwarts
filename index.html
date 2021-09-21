@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hogwards studentlist</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <h1>Hogwarts student list</h1>
+      <div id="navone">
+        <div id="filtering">
+          <h3 class="filterText">
+            Filter :
+            <button class="filter" data-action="filter" data-filter="all">all</button>
+            <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
+            <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
+            <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
+            <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
+            <button class="filter" data-action="filter" data-filter="exp">Expelled</button>
+            <div id="search">
+              <input type="text" id="site-search" placeholder="Find a student" />
+            </div>
+          </h3>
+        </div>
+      </div>
+
+      <div id="sorting">
+        <h3 class="filterText">
+          Sorting:
+          <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="firstName">First name</button>
+          <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="lastName">Last name</button>
+          <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="house">House</button>
+        </h3>
+      </div>
+
+      <section id="studentlist"></section>
+
+      <div id="popup"></div>
+
+      <template id="template">
+        <div data-field="article" class="articleWrapper">
+          <img data-field="img" src="./harryp/potter_h.png" />
+          <div class="columRight">
+            <h2 data-field="name"></h2>
+            <h4 data-field="house"></h4>
+            <button data-field="readMore" class="readMore">Read more</button>
+            <button data-field="expell" class="expell">Expell</button>
+          </div>
+        </div>
+      </template>
+
+      <template id="details">
+        <div class="housecrest"></div>
+        <button id="close">X</button>
+        <div id="detailwrapper">
+          <img class="detailimg" data-field="detailimg" src="" />
+          <div class="row">
+            <div class="columnone">
+              <h3 class="firstName"></h3>
+              <h3 class="middleName"></h3>
+              <h3 class="lastName"></h3>
+              <h3 class="nickName"></h3>
+            </div>
+            <div class="columnone">
+              <h3 class="house"></h3>
+              <h3 class="gender"></h3>
+              <h3 class="blood-status"></h3>
+            </div>
+          </div>
+        </div>
+      </template>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
