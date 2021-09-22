@@ -141,3 +141,8 @@ h3 {
   width: 222px;
   height: 30px;
 }
+/*-------counting-------*/
+.number {
+  float: right;
+  margin-right: 150px;
+}
