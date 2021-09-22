@@ -6,7 +6,7 @@ let allStudents = [];
 const detail = document.querySelector("#popup");
 const detailTemplate = document.querySelector("#details");
 
-let numberOfStudents = document.querySelector(".number");
+let numberOfStudents = document.querySelector(".studentNumber");
 
 const Student = {
   firstName: "",
@@ -28,7 +28,7 @@ function start() {
   // getButtons();
   loadJSON("https://petlatkea.dk/2021/hogwarts/students.json");
 
-  document.querySelector("#search").addEventListener("input", search);
+  document.querySelector(".search").addEventListener("input", searchStudent);
   registerButtons();
 }
 
@@ -50,9 +50,8 @@ async function loadJSON(url) {
 function prepareObject(jsonData) {
   console.log(jsonData);
   allStudents = jsonData.map(prepareObject);
-  //filteredStudents = allStudents;
 
-  numberOfStudents.textContent = `Students: ${search.length}`;
+  numberOfStudents.textContent = `Students: ${filteredStudents.length}`;
   displayList(allStudents);
 }
 
@@ -61,38 +60,53 @@ function prepareObject(student) {
   student.forEach((element) => {
     const student = Object.create(Student);
 
-    student.firstName = getFirstName(element.fullname);
-    student.lastName = getLastName(element.fullname);
-    student.middleName = getMidddelName(element.fullname);
-    student.nickName = getNickName(element.fullname);
-    student.image = getImage(student.firstName, student.lastName);
-    student.house = getHouse(element.house);
-    student.gender = getGender(element.gender);
+    student.firstName = takeFirstName(element.fullname);
+    student.lastName = takeLastName(element.fullname);
+    student.middleName = takeMidddelName(element.fullname);
+    student.nickName = takeNickName(element.fullname);
+    student.image = takeImage(student.firstName, student.lastName);
+    student.house = takeHouse(element.house);
+    student.gender = takeGender(element.gender);
     allStudents.push(student);
   });
   buildList();
 }
+function takeHouse(house) {
+  //console.log("takeHouse");
+  house = house.trim();
+  //sætter første bogstav i "house" med stort.
+  house = house.substring(0, 1).toUpperCase() + house.substring(1).toLowerCase();
+  return house;
+}
 
-function getFirstName(fullname) {
-  //console.log("getFirstName");
+function takeGender(gender) {
+  //console.log("takeGender");
+  gender = gender.trim();
+  //sætter første bogstav i "gender" med stort.
+  gender = gender.substring(0, 1).toUpperCase() + gender.substring(1).toLowerCase();
+  return gender;
+}
+function takeFirstName(fullname) {
+  //console.log("takeFirstName");
   let firstName = fullname.trim();
-  // If fullname includes a space, firstname is what comes before that first space
+  //sætter navnet før første mellemrum til at være "firstName"
   if (fullname.includes(" ")) {
     firstName = firstName.substring(0, firstName.indexOf(" "));
+    //sætter første bogstav i "first" med stort.
     firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1).toLowerCase();
   } else {
-    // if fullname only has one name - no space
+    //hvis der er mellemrum efter "firstName" skal det fjernes.
     firstName = firstName;
   }
   return firstName;
 }
 
-function getLastName(fullname) {
-  //console.log("getLastName");
+function takeLastName(fullname) {
+  //console.log("takeLastName");
   let lastName = fullname.trim();
   lastName = lastName.substring(lastName.lastIndexOf(" ") + 1);
   lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase();
-  // If fullname contains -, make first character uppercase
+  // navne efter "-" skal starte med stort
   if (fullname.includes("-")) {
     let lastNames = lastName.split("-");
     lastNames[1] = lastNames[1].substring(0, 1).toUpperCase() + lastNames[1].substring(1).toLowerCase();
@@ -101,15 +115,15 @@ function getLastName(fullname) {
   return lastName;
 }
 
-function getMidddelName(fullname) {
-  //console.log("getMidddelName");
+function takeMidddelName(fullname) {
+  //console.log("takeMidddelName");
   let middleName = fullname.trim();
   middleName = middleName.split(" ");
-  // If fullname includes "", ignore that name and make middlename none
+  // hvis der er "", skal mellemnavn sættets til nul
   if (fullname.includes(' "')) {
     middleName = "";
   } else if (middleName.length > 2) {
-    // if fullname is longer than 2, make second name middlename
+    //er der mere end to navne skal nr. 2 blive til mellemnavn
     middleName = middleName[1];
     middleName = middleName.substring(0, 1).toUpperCase() + middleName.substring(1).toLowerCase();
   } else {
@@ -118,11 +132,11 @@ function getMidddelName(fullname) {
   return middleName;
 }
 
-function getNickName(fullname) {
-  //console.log("getNickName");
+function takeNickName(fullname) {
+  //console.log("takeNickName");
   let nickName = fullname.trim();
   nickName = nickName.split(" ");
-  // if fullname contains "", make second name the nickname
+  // hvis der skrives et navn inde i "" skal det gøres til kældenavn.
   if (fullname.includes(' "')) {
     nickName = nickName[1];
   } else {
@@ -131,36 +145,21 @@ function getNickName(fullname) {
   return nickName;
 }
 
-function getImage(firstName, lastName) {
+function takeImage(firstName, lastName) {
   let image;
-  // If lastname is patil, use both lastname and firstname to get image
+
   if (lastName === "Patil") {
     image = `./images/${lastName.toLowerCase()}_${firstName.toLowerCase()}.png`;
   } else if (firstName === "Leanne") {
-    // If lastname is Leanne, show no image avaliable picture
+    //hvis photo på den uden billede
     image = `./images/nonphoto.png`;
   } else if (firstName === "Justin") {
-    // If lastname is Justin, split the lastname and use second lastname
     lastName = lastName.split("-");
     image = `./images/${lastName[1].toLowerCase()}_${firstName.substring(0, 1).toLowerCase()}.png`;
   } else {
     image = `./images/${lastName.toLowerCase()}_${firstName.substring(0, 1).toLowerCase()}.png`;
   }
   return image;
-}
-
-function getHouse(house) {
-  //console.log("getHouse");
-  house = house.trim();
-  house = house.substring(0, 1).toUpperCase() + house.substring(1).toLowerCase();
-  return house;
-}
-
-function getGender(gender) {
-  //console.log("getHouse");
-  gender = gender.trim();
-  gender = gender.substring(0, 1).toUpperCase() + gender.substring(1).toLowerCase();
-  return gender;
 }
 
 function selectFilter(event) {
@@ -283,23 +282,14 @@ function displayStudent(student) {
   // insætter det i studentlist så det kan vises i DOM'en.
   document.querySelector("#studentlist").appendChild(clone);
 }
-/*
-  function search() {
-    const searchValue = document.querySelector("#search").value.toLowerCase();
-    const search = allStudents.filter((student) => {
-      return student.firstName.toLowerCase().includes(searchValue) || student.lastName.toLowerCase().includes(searchValue);
-    });
-    displayList(search);
-  }
-  */
 
-function search() {
+function searchStudent() {
   //get the value from the input
-  //const searchValue = document.querySelector("#site-search").value;
-  const searchValue = document.querySelector("#search").value;
+  const searchValue = document.querySelector(".search").value;
   //filter through the students and find student based on search value
   const search = allStudents.filter((element) => element.name.toUpperCase().includes(searchValue.toUpperCase()) || element.name.toLowerCase().includes(searchValue.toLowerCase()));
-
+  //show how many students got filtered
+  numberOfStudents.textContent = `Students: ${search.length}`;
   displayList(search);
 }
 
