@@ -2,8 +2,11 @@
 window.addEventListener("DOMContentLoaded", start);
 
 let allStudents = [];
+
 const detail = document.querySelector("#popup");
 const detailTemplate = document.querySelector("#details");
+
+let numberOfStudents = document.querySelector(".number");
 
 const Student = {
   firstName: "",
@@ -41,20 +44,21 @@ async function loadJSON(url) {
   const response = await fetch(url);
   const jsonData = await response.json();
   // Når siden loades forbedres JSON data.
-  prepareObjects(jsonData);
+  prepareObject(jsonData);
 }
 
-function prepareObjects(jsonData) {
+function prepareObject(jsonData) {
   console.log(jsonData);
-  allStudents = jsonData.map(preapareObject);
+  allStudents = jsonData.map(prepareObject);
   //filteredStudents = allStudents;
 
+  numberOfStudents.textContent = `Students: ${search.length}`;
   displayList(allStudents);
 }
 
 // Prepare data objects
-function prepareObjects(students, bloodStatus) {
-  students.forEach((element) => {
+function prepareObject(student) {
+  student.forEach((element) => {
     const student = Object.create(Student);
 
     student.firstName = getFirstName(element.fullname);
@@ -69,9 +73,8 @@ function prepareObjects(students, bloodStatus) {
   buildList();
 }
 
-// Get firstname from fullname
 function getFirstName(fullname) {
-  console.log("getFirstName");
+  //console.log("getFirstName");
   let firstName = fullname.trim();
   // If fullname includes a space, firstname is what comes before that first space
   if (fullname.includes(" ")) {
@@ -84,9 +87,8 @@ function getFirstName(fullname) {
   return firstName;
 }
 
-// Get lastname from fullname
 function getLastName(fullname) {
-  console.log("getLastName");
+  //console.log("getLastName");
   let lastName = fullname.trim();
   lastName = lastName.substring(lastName.lastIndexOf(" ") + 1);
   lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase();
@@ -99,9 +101,8 @@ function getLastName(fullname) {
   return lastName;
 }
 
-// Get middlename from fullname
 function getMidddelName(fullname) {
-  console.log("getMidddelName");
+  //console.log("getMidddelName");
   let middleName = fullname.trim();
   middleName = middleName.split(" ");
   // If fullname includes "", ignore that name and make middlename none
@@ -117,9 +118,8 @@ function getMidddelName(fullname) {
   return middleName;
 }
 
-// Get nickname from fullname
 function getNickName(fullname) {
-  console.log("getNickName");
+  //console.log("getNickName");
   let nickName = fullname.trim();
   nickName = nickName.split(" ");
   // if fullname contains "", make second name the nickname
@@ -131,7 +131,6 @@ function getNickName(fullname) {
   return nickName;
 }
 
-// Get image
 function getImage(firstName, lastName) {
   let image;
   // If lastname is patil, use both lastname and firstname to get image
@@ -149,16 +148,16 @@ function getImage(firstName, lastName) {
   }
   return image;
 }
-// Get house
+
 function getHouse(house) {
-  console.log("getHouse");
+  //console.log("getHouse");
   house = house.trim();
   house = house.substring(0, 1).toUpperCase() + house.substring(1).toLowerCase();
   return house;
 }
 
 function getGender(gender) {
-  console.log("getHouse");
+  //console.log("getHouse");
   gender = gender.trim();
   gender = gender.substring(0, 1).toUpperCase() + gender.substring(1).toLowerCase();
   return gender;
@@ -296,11 +295,11 @@ function displayStudent(student) {
 
 function search() {
   //get the value from the input
+  //const searchValue = document.querySelector("#site-search").value;
   const searchValue = document.querySelector("#search").value;
   //filter through the students and find student based on search value
   const search = allStudents.filter((element) => element.name.toUpperCase().includes(searchValue.toUpperCase()) || element.name.toLowerCase().includes(searchValue.toLowerCase()));
-  //show how many students got filtered
-  //numberOfStudents.textContent = `Students: ${search.length}`;
+
   displayList(search);
 }
 
