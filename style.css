@@ -67,8 +67,30 @@ button {
   position: relative;
   left: -0.5vw;
   top: -0.5vw;
+  filter: opacity(0.3);
 }
 
+.prefect:hover {
+  filter: none;
+}
+
+.prefectAndInquisButtons .InquisSquad {
+  background-image: url("./images/Isquad.png");
+  width: 33px;
+  height: 45px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  left: -0.5vw;
+  top: -0.5vw;
+  filter: opacity(0.3);
+}
+.InquisSquad:hover {
+  filter: none;
+}
 h1 {
   color: white;
   font-size: 3em;
