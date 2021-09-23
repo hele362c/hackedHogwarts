@@ -55,6 +55,24 @@ button {
   cursor: pointer;
 }
 
+/* .prefect[data-field="prefect"]::after {
+  background-image: url("./images/prefect.png");
+  width: 38px;
+  height: 45px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  left: -0.5vw;
+  top: -0.5vw;
+}
+
+.prefect[data-field="prefect"][data-prefect="false"]::after {
+  filter: opacity(0.3);
+} */
+
 .prefectAndInquisButtons .prefect {
   background-image: url("./images/prefect.png");
   width: 38px;
@@ -70,7 +88,7 @@ button {
   filter: opacity(0.3);
 }
 
-.prefect:hover {
+.prefectAndInquisButtons .prefect:hover {
   filter: none;
 }
 
@@ -88,9 +106,14 @@ button {
   top: -0.5vw;
   filter: opacity(0.3);
 }
-.InquisSquad:hover {
+.prefectAndInquisButtons .InquisSquad:hover {
   filter: none;
 }
+
+.opacity {
+  filter: opacity(1);
+}
+
 h1 {
   color: white;
   font-size: 3em;
@@ -186,4 +209,41 @@ h3 {
 .number {
   float: right;
   margin-right: 186px;
+}
+
+/*-----expelling-----*/
+
+.hide {
+  visibility: hidden;
+}
+
+/*dialog*/
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dialog {
+  box-shadow: 1px 1px 10px #333;
+  border-radius: 12px;
+  padding: 2em;
+  background-color: #ffe19e;
+  position: relative;
+}
+button.closebutton {
+  position: absolute;
+  right: -1em;
+  top: -1em;
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+}
+.dialog h1 {
+  margin-top: 0;
 }
