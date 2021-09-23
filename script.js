@@ -6,7 +6,7 @@ let allStudents = [];
 const detail = document.querySelector("#popup");
 const detailTemplate = document.querySelector("#details");
 
-let numberOfStudents = document.querySelector(".studentNumber");
+let numberOfStudents = document.querySelector(".number");
 
 const Student = {
   firstName: "",
@@ -16,7 +16,11 @@ const Student = {
   gender: "",
   house: "",
   image: "",
+  expelled: false,
+  prefect: false,
+  squad: false,
 };
+
 //global variabler
 const settings = {
   filter: "all",
@@ -51,7 +55,6 @@ function prepareObject(jsonData) {
   console.log(jsonData);
   allStudents = jsonData.map(prepareObject);
 
-  numberOfStudents.textContent = `Students: ${filteredStudents.length}`;
   displayList(allStudents);
 }
 
@@ -69,8 +72,12 @@ function prepareObject(student) {
     student.gender = takeGender(element.gender);
     allStudents.push(student);
   });
+
   buildList();
+  numberOfStudents.textContent = `Students: ${allStudents.length}`;
+  console.log(`Hvis antal studerende ${allStudents.length}`);
 }
+
 function takeHouse(house) {
   //console.log("takeHouse");
   house = house.trim();
@@ -177,7 +184,7 @@ function setFilter(filter) {
 
 function filterList(filteredList) {
   //let filteredList = allStudents;
-  // create a filter list for the different houses.
+  //lav en filtrerings liste for de forskellige huse.
   if (settings.filterBy === "slytherin") {
     filteredList = allStudents.filter(isSlytherin);
   } else if (settings.filterBy === "hufflepuff") {
@@ -284,12 +291,11 @@ function displayStudent(student) {
 }
 
 function searchStudent() {
-  //get the value from the input
   const searchValue = document.querySelector(".search").value;
-  //filter through the students and find student based on search value
-  const search = allStudents.filter((element) => element.name.toUpperCase().includes(searchValue.toUpperCase()) || element.name.toLowerCase().includes(searchValue.toLowerCase()));
-  //show how many students got filtered
-  numberOfStudents.textContent = `Students: ${search.length}`;
+
+  const search = allStudents.filter((element) => element.firstName.toUpperCase().includes(searchValue.toUpperCase()) || element.firstName.toLowerCase().includes(searchValue.toLowerCase()));
+
+  //numberOfStudents.textContent = `Students: ${search.length}`;
   displayList(search);
 }
 
