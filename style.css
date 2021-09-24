@@ -54,8 +54,8 @@ button {
   border: none;
   cursor: pointer;
 }
-
-/* .prefect[data-field="prefect"]::after {
+/*------------prefects-------------*/
+.prefect {
   background-image: url("./images/prefect.png");
   width: 38px;
   height: 45px;
@@ -67,32 +67,17 @@ button {
   position: relative;
   left: -0.5vw;
   top: -0.5vw;
+  /* filter: opacity(0.3); */
 }
-
-.prefect[data-field="prefect"][data-prefect="false"]::after {
-  filter: opacity(0.3);
-} */
-
-.prefectAndInquisButtons .prefect {
-  background-image: url("./images/prefect.png");
-  width: 38px;
-  height: 45px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  left: -0.5vw;
-  top: -0.5vw;
-  filter: opacity(0.3);
-}
-
-.prefectAndInquisButtons .prefect:hover {
+.prefect:hover {
   filter: none;
 }
 
-.prefectAndInquisButtons .InquisSquad {
+.gray {
+  filter: grayscale();
+}
+/*------------InquisSquad-------------*/
+.InquisSquad {
   background-image: url("./images/Isquad.png");
   width: 33px;
   height: 45px;
@@ -104,14 +89,10 @@ button {
   position: relative;
   left: -0.5vw;
   top: -0.5vw;
-  filter: opacity(0.3);
+  /* filter: opacity(0.3); */
 }
-.prefectAndInquisButtons .InquisSquad:hover {
+.InquisSquad:hover {
   filter: none;
-}
-
-.opacity {
-  filter: opacity(1);
 }
 
 h1 {
@@ -217,7 +198,7 @@ h3 {
   visibility: hidden;
 }
 
-/*dialog*/
+/*--------------dialog----------------*/
 .modal {
   position: fixed;
   top: 0;

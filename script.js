@@ -17,6 +17,7 @@ const Student = {
   gender: "",
   house: "",
   image: "",
+  bloodStatus: "",
   expelled: false,
   prefect: false,
   squad: false,
@@ -25,7 +26,7 @@ const Student = {
 //global variabler
 const settings = {
   filter: "all",
-  sortBy: "name",
+  sortBy: "firstName",
   sortDir: "asc",
 };
 
@@ -253,7 +254,7 @@ function sortList(sortedList) {
 
   //sorter udfra fornavn, efternavn og huse
   function sortByPropperty(studentA, studentB) {
-    console.log(`sortBy is ${settings.sortBy}`);
+    // console.log(`sortBy is ${settings.sortBy}`);
     if (studentA[settings.sortBy] < studentB[settings.sortBy]) {
       return -1 * direction;
     } else {
@@ -266,9 +267,9 @@ function sortList(sortedList) {
 
 function buildList() {
   filteredStudents = allStudents.filter((student) => student.expelled === false);
-  console.log(filteredStudents);
+  //console.log(filteredStudents);
   const currentList = filterList(filteredStudents);
-  const sortedList = sortList(currentList);
+  //const sortedList = sortList(currentList);
 
   displayList(currentList);
 }
@@ -286,10 +287,9 @@ function displayStudent(student) {
   const clone = document.querySelector("#template").content.cloneNode(true);
 
   //henter article
-  const article = clone.querySelector("[data-field=article]");
+  //const article = clone.querySelector("[data-field=article]");
 
   // indsætter den clonet data in i article
-  const random = Math.floor(Math.random() * allStudents.length);
   clone.querySelector("[data-field=house]").textContent = student.house;
   clone.querySelector("[data-field=name]").textContent = `${student.firstName} ${student.lastName}`;
   clone.querySelector("[data-field=img]").src = student.image;
@@ -305,7 +305,7 @@ function displayStudent(student) {
 
   function clickOnExpell() {
     console.log("clickOnExpell");
-    if (student.firstName === true) {
+    if (student.expelled === true) {
       //insæt mig selv her når jeg skal hacksystemet true = helena
       student.expelled === false;
       //Helena kan ikke blive expelled.
@@ -317,101 +317,58 @@ function displayStudent(student) {
     buildList();
   }
 
-  // if (student.prefect === true) {
-  //   clone.querySelector(".prefect").dataset.prefect = true;
-  // } else {
-  //   clone.querySelector(".prefect").dataset.prefect = false;
-  // }
-  // if (student.prefect === true) {
-  //   clone.querySelector(".prefect").classList.remove("opacity");
-  // } else if (student.squad === false) {
-  //   clone.querySelector(".prefect").classList.add("opacity");
-  // }
-
-  // //prefects
-  // clone.querySelector(".prefect").dataset.prefect = student.prefect;
-  // clone.querySelector(".prefect").addEventListener("click", clickPrefect);
-
-  // function clickPrefect() {
-  //   if (student.prefect === true) {
-  //     student.prefect = false;
-  //     //clone.querySelector(".prefect").classList.remove(".falsy");
-  //   } else {
-  //     student.prefect = true;
-  //     // clone.querySelector(".prefect").classList.add(".falsy");
-  //   }
-  //   buildList();
-  // }
-
-  // Prefectss
+  //---------------Prefects-----------------------
+  // ændre farven på prefect (aktiv og ikke aktiv)
   if (student.prefect === true) {
-    clone.querySelector(".prefect").classList.remove("opacity");
+    clone.querySelector(".prefect").classList.remove("gray");
   } else if (student.prefect === false) {
-    clone.querySelector(".prefect").classList.add("opacity");
+    clone.querySelector(".prefect").classList.add("gray");
   }
 
+  // kalder funktionen click på prefect
   clone.querySelector(".prefect").addEventListener("click", clickPrefect);
 
+  //prefect true eller false på click
   function clickPrefect() {
-    if (student.prefect) {
+    if (student.prefect === true) {
       student.prefect = false;
     } else {
-      tryTomakeAPrefect(student);
+      tryToMakePrefect(student);
     }
     buildList();
   }
 
-  // insætter det i studentlist så det kan vises i DOM'en.
+  // insdætter det i studentlist så det kan vises i DOM'en.
   document.querySelector("#studentlist").appendChild(clone);
 }
 
-function tryTomakeAPrefect(selectedStudent) {
-  const prefects = allStudents.filter((student) => student.prefect === true);
+function tryToMakePrefect(selectedStudent) {
+  const prefects = allStudents.filter((student) => student.prefect);
 
-  const numberOfprefects = prefects.length;
-  const other = prefects.filter((student) => student.house === selectedStudent.house).shift();
+  const other = prefects.filter((student) => student.house === selectedStudent.house);
+  const numberOfPrefects = other.length;
 
-  //if there is anther of the same type
-  if (other !== undefined) {
-    console.log("there can be only be one prefects of each house!");
-    removeOther(other);
-  } else if (numberOfStudents >= 2) {
-    console.log("there can only be two prefects!");
-    removeAorB(prefects[0], prefects[1]);
+  // der må ikke være mere end to for samme hus som er prefect.
+  //hvis der er to andre "other" fra samme hus.
+  console.log(`There are ${numberOfPrefects} prefects`);
+  if (numberOfPrefects >= 2) {
+    removeAorB(other[0], other[1]);
   } else {
     makePrefect(selectedStudent);
   }
-
-  //console.log(`There are ${numberOfprefects} prefects`);
-  // console.log(`the other prefect of this house is ${other.firstName}`);
-
-  function removeOther(other) {
-    //ask the user to ignore, or remove "other"
-    document.querySelector("#remove_other").classList.remove("hide");
-    document.querySelector("#remove_other .closebutton").addEventListener("click", closeDialog);
-    document.querySelector("#remove_other #removeother").addEventListener("click", clickRemoveOther);
-    //if ignore - do nothing
-    function closeDialog() {
-      document.querySelector("#remove_other").classList.add("hide");
-      document.querySelector("#remove_other .closebutton").addEventListener("click", closeDialog);
-      document.querySelector("#remove_other #removeother").addEventListener("click", clickRemoveOther);
-    }
-    //if remove other:
-    function clickRemoveOther() {
-      removePrefect(other);
-      makePrefect(selectedStudent);
-      buildList();
-      closeDialog();
-    }
-  }
+  //console.log(`the other prefect of this house is ${other.firstName}`);
   function removeAorB(prefectA, prefectB) {
-    //ask the user to ignore or remove A or B
+    // Ask user to igore or remove a or b
     document.querySelector("#remove_aorb").classList.remove("hide");
     document.querySelector("#remove_aorb .closebutton").addEventListener("click", closeDialog);
     document.querySelector("#remove_aorb #removea").addEventListener("click", clickRemoveA);
     document.querySelector("#remove_aorb #removeb").addEventListener("click", clickRemoveB);
 
-    //if ignore - do nothing
+    // Show names on buttons
+    document.querySelector("#remove_aorb [data-field=prefectA]").textContent = `${prefectA.firstName} ${prefectA.lastName}`;
+    document.querySelector("#remove_aorb [data-field=prefectB]").textContent = `${prefectB.firstName} ${prefectB.lastName}`;
+
+    // If ignore - do nothing
     function closeDialog() {
       document.querySelector("#remove_aorb").classList.add("hide");
       document.querySelector("#remove_aorb .closebutton").removeEventListener("click", closeDialog);
@@ -420,7 +377,7 @@ function tryTomakeAPrefect(selectedStudent) {
     }
 
     function clickRemoveA() {
-      //if removeA:
+      // If removeA
       removePrefect(prefectA);
       makePrefect(selectedStudent);
       buildList();
@@ -428,7 +385,7 @@ function tryTomakeAPrefect(selectedStudent) {
     }
 
     function clickRemoveB() {
-      //else - if removeB
+      // If removeB
       removePrefect(prefectB);
       makePrefect(selectedStudent);
       buildList();
@@ -436,8 +393,8 @@ function tryTomakeAPrefect(selectedStudent) {
     }
   }
 
-  function removePrefect(prefectStudent) {
-    prefectStudent.prefect = false;
+  function removePrefect(studentPrefect) {
+    studentPrefect.prefect = false;
   }
 
   function makePrefect(student) {
@@ -450,10 +407,11 @@ function searchStudent() {
 
   const search = allStudents.filter((element) => element.firstName.toUpperCase().includes(searchValue.toUpperCase()) || element.firstName.toLowerCase().includes(searchValue.toLowerCase()));
 
-  //numberOfStudents.textContent = `Students: ${search.length}`;
+  numberOfStudents.textContent = `Students: ${search.length}`;
   displayList(search);
 }
 
+//---------------POP-UP---------------
 function showDetails(student) {
   console.log("details clicked");
   const clone = detailTemplate.cloneNode(true).content;
