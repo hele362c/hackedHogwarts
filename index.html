@@ -22,6 +22,7 @@
             <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
             <button class="filter" data-action="filter" data-filter="expelled">Expelled</button>
             <button class="filter" data-action="filter" data-filter="prefect">Prefect</button>
+            <button class="filter" data-action="filter" data-filter="squad">I-Squad</button>
             <div id="search">
               <input type="text" class="search" placeholder="🔍 Find a student" />
             </div>
@@ -80,6 +81,13 @@
           </div>
         </div>
       </template>
+
+      <div id="cantBeSquad" class="modal hide">
+        <div class="dialog">
+          <button class="closebutton">X</button>
+          <p>Only pure-blood students from Slytherin can be a part of the inquisitorial squad.</p>
+        </div>
+      </div>
 
       <div id="remove_aorb" class="modal hide">
         <div class="dialog">
