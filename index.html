@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header></header>
+    <header>
+      <img class="hogwarts" src="images/houses.png" alt="houses" />
+      <h1 class="hogwarsth1">Hogwarts student list</h1>
+      <img src="images/dobby.png" alt="dobby" class="hack" id="dobby" />
+    </header>
     <main>
-      <h1>Hogwarts student list</h1>
       <div id="navone">
         <div id="filtering">
           <h3 class="filterText">
@@ -72,23 +75,18 @@
               <h3 class="middleName"></h3>
               <h3 class="lastName"></h3>
               <h3 class="nickName"></h3>
+              <h3 class="house"></h3>
             </div>
             <div class="columnone">
-              <h3 class="house"></h3>
               <h3 class="gender"></h3>
-              <h3 class="blood_status"></h3>
+              <h3 class="bloodStatus"></h3>
+              <h3 class="prefectet"></h3>
+              <h3 class="ISquad"></h3>
+              <h3 class="exp"></h3>
             </div>
           </div>
         </div>
       </template>
-
-      <div id="cantBeSquad" class="modal hide">
-        <div class="dialog">
-          <button class="closebutton">X</button>
-          <p>Only pure-blood students from Slytherin can be a part of the inquisitorial squad.</p>
-        </div>
-      </div>
-
       <div id="remove_aorb" class="modal hide">
         <div class="dialog">
           <button class="closebutton">X</button>
@@ -101,6 +99,20 @@
             <button id="removea">remove <span data-field="prefectA">A</span></button>
             <button id="removeb">remove <span data-field="prefectB">B</span></button>
           </div>
+        </div>
+      </div>
+
+      <div id="cantBeSquad" class="modal hide">
+        <div class="dialog">
+          <button class="closebutton">X</button>
+          <p>Only pure-blood students from Slytherin can be a part of the inquisitorial squad.</p>
+        </div>
+      </div>
+
+      <div id="canTExpell" class="modal hide">
+        <div class="dialog">
+          <button class="closebutton">X</button>
+          <h2>This student can not be expelled.</h2>
         </div>
       </div>
     </main>
