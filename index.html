@@ -17,7 +17,7 @@
       <div id="navone">
         <div id="filtering">
           <h3 class="filterText">
-            Filter :
+            Filter by:
             <button class="filter" data-action="filter" data-filter="all">all</button>
             <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
             <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
@@ -35,7 +35,7 @@
 
       <div id="sorting">
         <h3 class="filterText">
-          Sorting:
+          Sort by:
           <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="firstName">First name</button>
           <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="lastName">Last name</button>
           <button class="sort" data-action="sort" data-sort-direction="asc" data-sort="house">House</button>
@@ -90,7 +90,7 @@
       <div id="remove_aorb" class="modal hide">
         <div class="dialog">
           <button class="closebutton">X</button>
-          <h1>Warning</h1>
+          <h3>Warning</h3>
           <p>
             There can not be more than two prefects. <br />
             do you want to remove one of the existing prefects?
@@ -105,14 +105,19 @@
       <div id="cantBeSquad" class="modal hide">
         <div class="dialog">
           <button class="closebutton">X</button>
-          <p>Only pure-blood students from Slytherin can be a part of the inquisitorial squad.</p>
+          <h3>WARNING!</h3>
+          <p>
+            This is Only pure-blood students or students from Slytherin there <br />
+            can be a part of the inquisitorial squad.
+          </p>
         </div>
       </div>
 
       <div id="canTExpell" class="modal hide">
         <div class="dialog">
           <button class="closebutton">X</button>
-          <h2>This student can not be expelled.</h2>
+          <h3>WARNING!</h3>
+          <p>This student can not be expelled.</p>
         </div>
       </div>
     </main>

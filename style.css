@@ -19,6 +19,7 @@ body {
   border-radius: 50%;
   transform: scale(1);
   animation: pulse-black 3s infinite;
+  cursor: pointer;
 }
 
 @keyframes pulse-black {
@@ -90,6 +91,9 @@ img {
   left: 1.9vw;
   top: 12.5vw;
 }
+.readMore:hover {
+  box-shadow: 1px 1px 2px 1px #08474e;
+}
 
 .expell {
   background-color: #881a1b;
@@ -98,6 +102,9 @@ img {
   position: absolute;
   left: 15.1vw;
   top: 12.5vw;
+}
+.expell:hover {
+  box-shadow: 1px 1px 2px 1px #631314;
 }
 
 button {
@@ -158,18 +165,28 @@ h4 {
   margin-top: -1.01em;
 }
 .filter {
-  background-color: #e7ba25;
+  background-color: white;
   padding: 8px 8px;
   margin-inline: 3px;
+}
+.filter:hover {
+  background-color: #e7ba25;
+  box-shadow: 1px 1px 3px 1px #c39c1a;
+  color: white;
 }
 .filterText {
   color: white;
   padding-left: 3em;
 }
 .sort {
-  background-color: #e7ba25;
+  background-color: white;
   padding: 8px 8px;
   margin-inline: 3px;
+}
+.sort:hover {
+  background-color: #e7ba25;
+  box-shadow: 1px 1px 3px 1px #c39c1a;
+  color: white;
 }
 
 /*----------------popUp---------------*/
@@ -223,7 +240,7 @@ h3 {
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 73px;
+  column-gap: 25px;
 }
 
 /*-------search bar-------*/
@@ -262,20 +279,28 @@ h3 {
   align-items: center;
 }
 .dialog {
-  box-shadow: 1px 1px 10px #333;
+  box-shadow: 4px 3px 8px #691314;
   border-radius: 12px;
   padding: 2em;
-  background-color: #ffe19e;
+  background-color: #9b2223;
   position: relative;
+  filter: opacity(0.8);
+  color: ghostwhite;
 }
 button.closebutton {
   position: absolute;
-  right: -1em;
-  top: -1em;
-  border-radius: 50%;
-  width: 2em;
-  height: 2em;
+  right: 1em;
+  top: 1.1em;
+  /* width: 1em; */
+  /* height: 3em; */
+  background-color: transparent;
+  color: ghostwhite;
+  cursor: pointer;
 }
-.dialog h1 {
+.dialog h3 {
   margin-top: 0;
+  font-weight: bolder;
+}
+.dialog p {
+  font-weight: bold;
 }
