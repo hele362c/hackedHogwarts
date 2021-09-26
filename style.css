@@ -12,19 +12,27 @@ body {
   position: relative;
   width: 10vw;
   height: auto;
-  left: 77vw;
+  left: 78vw;
   top: -2vw;
   margin-bottom: -9px;
-  filter: opacity(0.9);
+  filter: opacity(0.3);
   border-radius: 50%;
   transform: scale(1);
-  animation: pulse-black 3s infinite;
+  animation: pulse 2.5s infinite;
   cursor: pointer;
 }
 
-@keyframes pulse-black {
+.hogwarts {
+  display: block;
+  width: 165px;
+  margin: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: pulse 2.5s infinite;
+}
+@keyframes pulse {
   0% {
-    transform: scale(0.95);
+    transform: scale(0.9);
   }
 
   70% {
@@ -32,25 +40,8 @@ body {
   }
 
   100% {
-    transform: scale(0.95);
+    transform: scale(0.9);
   }
-}
-
-/* .hack {
-  position: relative;
-  width: 10vw;
-  height: auto;
-  left: 77vw;
-  top: -2vw;
-  margin-bottom: -9px;
-  filter: opacity(0.9);
-} */
-.hogwarts {
-  display: block;
-  width: 165px;
-  margin: 20px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /*-----student template--------*/
@@ -257,7 +248,7 @@ h3 {
 /*-------counting-------*/
 .number {
   float: right;
-  margin-right: 186px;
+  margin-right: 98px;
 }
 
 /*-----expelling-----*/
@@ -303,4 +294,12 @@ button.closebutton {
 }
 .dialog p {
   font-weight: bold;
+}
+#removeb,
+#removea {
+  background-color: #791010;
+  padding: 8px 8px;
+  margin-inline: 2px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px 1px #5d0c0c;
 }
