@@ -11,6 +11,7 @@ const detailTemplate = document.querySelector("#details");
 
 let numberOfStudents = document.querySelector(".number");
 let theSystemIsHacked = false;
+
 const Student = {
   firstName: "",
   middleName: "",
@@ -87,13 +88,13 @@ function prepareObject(students, bloodStatus) {
     student.gender = takeGender(element.gender);
     student.bloodStatus = takeBloodStatus(student.lastName, bloodStatus);
     allStudents.push(student);
-    displayList(allStudents);
-    numberOfStudents.textContent = `Students: ${allStudents.length}`;
+    //displayList(allStudents);
+    //numberOfStudents.textContent = `Students: ${allStudents.length}`;
   });
 
   buildList();
-  numberOfStudents.textContent = `Students: ${allStudents.length}`;
-  console.log(`Hvis antal studerende ${allStudents.length}`);
+  // numberOfStudents.textContent = `Students: ${allStudents.length}`;
+  // console.log(`Hvis antal studerende ${allStudents.length}`);
 }
 
 function takeBloodStatus(lastName, bloodStatus) {
@@ -305,7 +306,7 @@ function buildList() {
   filteredStudents = allStudents.filter((student) => student.expelled === false);
   //console.log(filteredStudents);
   const currentList = filterList(filteredStudents);
-  //const sortedList = sortList(currentList);
+  const sortedList = sortList(currentList);
 
   displayList(currentList);
 }
@@ -316,6 +317,8 @@ function displayList(students) {
 
   // lav en ny liste
   students.forEach(displayStudent);
+  //viser antal studerne under de forskellige filteringer.
+  document.querySelector(".number").textContent = `Number of students: ${students.length}`;
 }
 
 function displayStudent(student) {
@@ -419,7 +422,7 @@ function displayStudent(student) {
 }
 
 function tryToMakePrefect(selectedStudent) {
-  const prefects = filteredStudents.filter((student) => student.prefects);
+  const prefects = filteredStudents.filter((student) => student.prefect);
 
   const other = prefects.filter((student) => student.house === selectedStudent.house);
   const numberOfPrefects = other.length;
