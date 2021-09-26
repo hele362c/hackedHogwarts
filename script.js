@@ -304,7 +304,6 @@ function sortList(sortedList) {
 
 function buildList() {
   filteredStudents = allStudents.filter((student) => student.expelled === false);
-  //console.log(filteredStudents);
   const currentList = filterList(filteredStudents);
   const sortedList = sortList(currentList);
 
@@ -314,7 +313,6 @@ function buildList() {
 function displayList(students) {
   // ryd liste
   document.querySelector("#studentlist").innerHTML = "";
-
   // lav en ny liste
   students.forEach(displayStudent);
   //viser antal studerne under de forskellige filteringer.
@@ -618,7 +616,7 @@ function temporarilySquad() {
       setTimeout(() => {
         student.squad = false;
         buildList();
-      }, 3000);
+      }, 5000);
     }
   });
 }
